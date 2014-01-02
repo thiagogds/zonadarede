@@ -6,7 +6,6 @@ config     = require('../config');
 if (!server) {
     server   = new Express();
     server.use(Express.static(__dirname.replace('node/modules','angular')));
-    server.use(Express.static(__dirname.replace('node/modules','angular_modules')));
     server.use(Express.compress());
     server.use(Express.urlencoded());
     server.use(Express.json());
