@@ -41,6 +41,24 @@ server.get('/users/:userId', function (request, response, next) {
     });
 });
 
+server.post('/users/:userId/rfid', function (request, response, next) {
+    'use strict';
+
+    User.findOne({
+        'facebookId' : request.param('facebookId'),
+        'password' : request.param('password')
+    }, function (error, user) {
+        if (error) { return next(error); }
+        if (!user) { return response.send(401, new Error('invalid password')); }
+
+        user.rfid = request.param('rfid');
+        user.save(function (error) {
+            if (error) { return next(error); }
+            response.send(200, user);
+        });
+    });
+});
+
 server.get('/users', function (request, response, next) {
     'use strict';
 

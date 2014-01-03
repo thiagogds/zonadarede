@@ -15,6 +15,9 @@ schema = new mongoose.Schema({
         'unique' : {'index' : {
             'unique' : true
         }}
+    },
+    'rfid' : {
+        'type' : String
     }
 },{
     'collection' : 'users'
@@ -30,7 +33,8 @@ schema.pre('save', function (next) {
 schema.plugin(require('mongoose-json-select'), {
     '_id' : 1,
     'facebookId' : 1,
-    'password' : 1
+    'password' : 1,
+    'rfid' : 1
 });
 
 mongoose.model('User', schema);

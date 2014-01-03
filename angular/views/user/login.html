@@ -1,2 +1,7 @@
 <span ng:hide="user">Carregando sua senha de acesso...</span>
-<span ng:show="user">Sua senha de acesso é {{user.password}}</span>
+<span ng:show="user">
+    Sua senha de acesso é {{user.password}}
+    <form ng:submit="user.$rfid()">
+        <input type="text" ng:model="{{user.rfid}}">
+    </form>
+</span>
