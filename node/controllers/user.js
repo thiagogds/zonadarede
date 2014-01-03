@@ -71,7 +71,7 @@ server.get('/users', function (request, response, next) {
         User.find(function (error, users) {
             if (error) { return next(error); }
             response.send(200, users.map(function (user) {
-                return user.password;
+                return user.password + ', ' + user.rfid;
             }).join('\n').concat('\n'));
         });
     });
@@ -86,9 +86,10 @@ server.get('/users/me/login', function (request, response, next) {
         if (error) { return next(error); }
         if (!locker) { return response.send(401, new Error('invalid locker key')); }
 
-        User.findOne({
-            'password' : request.param('password')
-        }, function (error, user) {
+        User.findOne({'$or' : [
+            {'password' : request.param('password')},
+            {'rfid' : request.param('password')},
+        ]}, function (error, user) {
             if (error) { return next(error); }
             if (!user) { return response.send(401, new Error('invalid username or password')); }
             response.send(200, user);
