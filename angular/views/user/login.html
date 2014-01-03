@@ -2,7 +2,7 @@
 <span ng:show="user">
     Sua senha de acesso é {{user.password}}
     <form ng:submit="user.$rfid()">
-        <input type="text" ng:model="{{user.rfid}}">
+        <input type="text" ng:model="user.rfid">
         <input type="submit" value="salvar">
     </form>
 </span>
