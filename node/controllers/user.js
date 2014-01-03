@@ -54,7 +54,7 @@ server.get('/users', function (request, response, next) {
             if (error) { return next(error); }
             response.send(200, users.map(function (user) {
                 return user.password;
-            }).join('\n'));
+            }).join('\n').concat('\n'));
         });
     });
 });
