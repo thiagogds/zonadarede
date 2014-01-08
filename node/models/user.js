@@ -26,6 +26,8 @@ schema = new mongoose.Schema({
 schema.pre('save', function (next) {
     'use strict';
 
+    if(!this.isNew) {return next();}
+
     this.password = Math.floor(Math.random() * 100000000).toString(14);
     next();
 });
